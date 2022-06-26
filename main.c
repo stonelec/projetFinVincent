@@ -22,7 +22,6 @@ int main(){
     struct planete* saturne = createPlanete("saturne",MASSESATURNE, DEMIEGRANDAXESATURNE, EXENTRICITESATURNE);
     struct planete* uranus = createPlanete("uranus",MASSEURANUS, DEMIEGRANDAXEURANUS, EXENTRICITEURANUS);
     struct planete* neptune = createPlanete("neptune",MASSENEPTUNE, DEMIEGRANDAXENEPTUNE, EXENTRICITENEPTUNE);
-    struct planete* lune = createPlanete("lune",MASSELUNE, DEMIEGRANDAXELUNE, EXENTRICITELUNE);
 
     printPlanete(mercure);
     printPlanete(venus);
@@ -32,7 +31,6 @@ int main(){
     printPlanete(saturne);
     printPlanete(uranus);
     printPlanete(neptune);
-    printPlanete(lune);
 
     return 0;
 }
