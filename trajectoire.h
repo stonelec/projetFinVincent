@@ -6,19 +6,24 @@
 #define PROJETFINVINCENT_TRAJECTOIRE_H
 
 #include "infoPLanete.h"
-#include "liste.h"
+#include "queueliste.h"
+#include "point.h"
 
-struct trajectoire{
-    struct point* list;
-};
-struct trajectoire* createTrajectoire();
-struct trajectoire* createEmptyTrajectoire();
+void firstPoint(struct Queue* newTraj,double demieGrandAxe, double exentricite,int temps,  bool valid);
 
-//more
-double energiePotentielle(double massePlanete,double masseSoleil , double constanteG, struct vect* positionPlanete, struct vect* positionSoleil);
+struct Queue* createTrajectoire(double masse, double demieGrandAxe, double exentricite);
 
-double energieCinétique(double massePlanete, struct vect* vitesse);
+struct vect* position(struct vect*  positionPost, struct vect*  vitessePost);
 
-double energieTotale(double energiePotentielle, double energieCinétique);
+struct vect* acceleration(struct vect* positionPlanete);
+
+struct vect* vitesse(struct vect*  vitessePost, struct vect*  accelerationPost);
+/*
+double energiePotentielle(double massePlanete, struct vect* positionPlanete);
+
+double energieCinetique(double massePlanete, struct vect* vitesse);
+
+double energieTotale(double massePlanete, struct vect* positionPlanete, struct vect* vitesse);
+*/
 
 #endif //PROJETFINVINCENT_TRAJECTOIRE_H

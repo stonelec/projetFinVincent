@@ -16,12 +16,6 @@ struct point{
 };
 struct point* createPoint(struct vect* position, struct vect* vitesse, int temps);
 
-struct vect* acceleration(double massePlanete, double constanteG, struct vect* positionPlanete);
-
-double vitesseInitiale(double masseSoleil, double constanteG, double demieGrandAxeOrbite, double exentriciteOrbite);
-
-struct vect* vitesse(struct vect*  vitessePost, struct vect*  accelerationPost, int temps);
-
-struct vect* position(struct vect*  positionPost, struct vect*  vitessePost, int temps);
+void printPoint(struct point* point);
 
 #endif //PROJETFINVINCENT_POINT_H

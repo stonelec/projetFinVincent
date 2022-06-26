@@ -1,92 +1,80 @@
 //
 // Created by vince on 24/06/2022.
 //
-
+#include "liste.h"
 #include "queueliste.h"
-
-
-//1
-
-struct Queue* createEmptyQueue() {
+struct Queue* createEmptyQueue(){
     struct Queue* q = malloc(sizeof(struct Queue));
-    if (q!=NULL) {
+    if(q != NULL){
         q->l = createEmptyList();
     }
     return q;
 }
 
-//2
-
-void enqueue(struct Queue* q, struct point* point, bool* valid){
-    *valid=true;
-    struct Cell* newHead = createCell(point);
-    newHead->next = q->l->head;
-    q->l->head = newHead;
-    q->l->size ++;
-}
-
-//3
-
-int head(struct Queue* q, bool* valid) {
+void enqueue(struct Queue* q, struct vect* position, struct vect* vitesse, int temps, bool* valid){
     *valid = true;
-    if (q->l->size == 0) {
-        *valid = false;
-        return 000;
-    } else {
-        struct Cell* stock = q->l->head;
-        while (stock->next != NULL) {
-            stock = stock->next;
-        }
-        return stock->point;
-    }
-}
-//4
+    addFirst(q->l, position, vitesse, temps);
 
-int dequeue(struct Queue* q, bool* valid){
-    *valid=true;
-    if (q->l->size == 0) {
-        *valid = false;
-        return 000;
-    } else {
-        int place = listSize(q->l)-1;
-        int result = getItemPos(q->l, place, valid);
-        deleteItemPos(q->l, place, valid);
-        return result;
-    }
 }
 
-//5
+struct point* head(struct Queue* q, bool* valid){
+    if(isQueueEmpty(q)){
+        *valid = false;
+        return 0;
+    }
+    *valid = true;
+    struct point* iter = q->l->head;
+    while(iter->next != NULL){
+        iter = iter->next;
+    }
+    return iter;
+}
+
+struct point* dequeue(struct Queue* q, bool* valid){
+    *valid = true;
+    if(isQueueEmpty(q)){
+        *valid = false;
+        return 0;
+    }
+    if(queueSize(q) == 1){
+        struct point* res = getItemPos(q->l,0,valid);
+        deleteFirst(q->l);
+        return res;
+    }
+    struct point* res = getItemPos(q->l, queueSize(q)-1,valid);
+    deleteItemPos(q->l, queueSize(q)-1,valid);
+    return res;
+}
 
 unsigned int queueSize(struct Queue* q){
-    return q->l->size;
+    return listSize(q->l);
 }
-
-//6
 
 bool isQueueEmpty(struct Queue* q){
-    return (isListEmpty(q->l));
+    return (queueSize(q) == 0);
 }
-
-//7
 
 void printQueue(struct Queue* q){
-    printf("rear -> ");
     if(isQueueEmpty(q)){
-        printf("NULL <- front\n");
-    } else {
-        struct Cell* stock = q->l->head;
-        while (stock != NULL) {
-            printf("%d - ", stock->point);
-            stock = stock->next;
-        }
-        printf("\b\b\b <- front\n");
+        printf("rear -> NULL <- front");
+        return;
     }
+    struct point* iter = q->l->head;
+    printf("rear -> ");
+    printPoint(iter);
+    unsigned int size = queueSize(q);
+    iter = iter->next;
+    for(unsigned int i=1; i<size;i++){
+        printf("\n");
+        printPoint(iter);
+        iter = iter->next;
+    }
+    printf(" <- front\n");
 }
 
-//8
-
-void deleteQueue(struct Queue** q) {
-    deleteList(&((*q)->l));
+void deleteQueue(struct Queue** q){
+    struct List* temp = (*q)->l;
+    deleteList(&temp);
     free(*q);
-    q=NULL;
 }
+

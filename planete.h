@@ -17,9 +17,11 @@
 
 struct planete{
     char* name;
-    struct trajectoire* traj;
+    struct Queue* traj;
 };
 
 struct planete* createPlanete(char* name, double masse, double demieGrandAxe, double exentricite);
+
+void printPlanete (struct planete* planete);
 
 #endif //PROJETFINVINCENT_PLANETE_H

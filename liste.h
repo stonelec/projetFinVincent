@@ -8,25 +8,16 @@
 #include "infoPLanete.h"
 #include "point.h"
 
-//operation
-struct Cell{
-    struct point* point;
-    struct Cell* next;
-};
 struct List{
     unsigned int size;
-    struct Cell* head;
+    struct point* head;
 };
 
-
-struct Cell* createCell(struct point* point);
 struct List* createEmptyList();
 
-void addFirst(struct List* l, struct point* point);
+void addFirst(struct List* l, struct vect* position, struct vect* vitesse, int temps);
 
-bool isListEmpty(struct List* l);
-
-int getItemPos(struct List* l, unsigned int position, bool* valid);
+struct point* getItemPos(struct List* l, unsigned int place, bool* valid);
 
 void deleteFirst(struct List* l);
 
@@ -34,10 +25,11 @@ void printList(struct List* l);
 
 unsigned int listSize(struct List* l);
 
-void addItemPos(struct List* l, struct point* point, unsigned int position, bool* valid);
+void addItemPos(struct List* l, struct vect* position, struct vect* vitesse, int temps, unsigned int place, bool* valid);
 
-void deleteItemPos(struct List* l, unsigned int position, bool* valid);
+void deleteItemPos(struct List* l, unsigned int place, bool* valid);
 
 void deleteList(struct List** l);
+
 
 #endif //PROJETFINVINCENT_LISTE_H

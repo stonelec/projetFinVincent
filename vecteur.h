@@ -21,13 +21,12 @@ struct vect* additionVecteurs (struct vect* vecteur1, struct vect* vecteur2);
 
 struct vect* soustractionVecteurs (struct vect* vecteur1, struct vect* vecteur2);
 
-struct vect* multiplicationVecteursParReel (struct vect* vecteur, int reel);
+struct vect* multiplicationVecteursParReel (struct vect* vecteur, double reel);
 
-struct vect* multiplicationVecteursParScalaire (struct vect* vecteur, int scalaire);
+struct vect* multiplicationVecteursParScalaire (struct vect* vecteur, double scalaire);
 
 double normeVecteur (struct vect* vecteur);
 
-double distanceEntre2Vects(struct vect* vecteur1, struct vect* vecteur2);
 
 void moduleTest ();
 
