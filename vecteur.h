@@ -27,6 +27,7 @@ struct vect* multiplicationVecteursParScalaire (struct vect* vecteur, double sca
 
 double normeVecteur (struct vect* vecteur);
 
+double distanceEntre2Vects(struct vect* vecteur1, struct vect* vecteur2);
 
 void moduleTest ();
 

@@ -12,9 +12,13 @@ int main(){
     printVect(vect);
     */
     //printf("\nis%e",vect);
-
-
+    /*
+    FILE* mercureFile = fopen("mercure.txt","w");
+    fprintf(mercureFile,"coucou");
+    fclose(mercureFile);
+    */
     struct planete* mercure = createPlanete("Terre", MASSEMERCURE, DEMIEGRANDAXEMERCURE, EXENTRICITEMERCURE  );
+    /*
     struct planete* venus = createPlanete("venus",MASSEVENUS , DEMIEGRANDAXEVENUS, EXENTRICITEVENUS);
     struct planete* terre = createPlanete("terre",MASSETERRE, DEMIEGRANDAXETERRE, EXENTRICITETERRE);
     struct planete* mars = createPlanete("mars",MASSEMARS, DEMIEGRANDAXEMARS, EXENTRICITEMARS);
@@ -22,8 +26,10 @@ int main(){
     struct planete* saturne = createPlanete("saturne",MASSESATURNE, DEMIEGRANDAXESATURNE, EXENTRICITESATURNE);
     struct planete* uranus = createPlanete("uranus",MASSEURANUS, DEMIEGRANDAXEURANUS, EXENTRICITEURANUS);
     struct planete* neptune = createPlanete("neptune",MASSENEPTUNE, DEMIEGRANDAXENEPTUNE, EXENTRICITENEPTUNE);
-
-    printPlanete(mercure);
+    */
+    //printPlanete(mercure);
+    filePlanete(mercure);
+     /*
     printPlanete(venus);
     printPlanete(terre);
     printPlanete(mars);
@@ -31,6 +37,7 @@ int main(){
     printPlanete(saturne);
     printPlanete(uranus);
     printPlanete(neptune);
+    */
 
     return 0;
 }

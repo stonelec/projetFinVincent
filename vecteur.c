@@ -29,3 +29,6 @@ struct vect* multiplicationVecteursParReel (struct vect* vecteur, double reel){
 double normeVecteur (struct vect* vecteur){
     return sqrt(pow((vecteur->x),2) + pow((vecteur->y),2) + pow((vecteur->z),2));
 }
+double distanceEntre2Vects(struct vect* vecteur1, struct vect* vecteur2){
+    return sqrt(pow((vecteur1->x-vecteur2->x),2) + pow((vecteur1->y-vecteur2->z),2) + pow((vecteur1->z-vecteur2->z),2));
+}

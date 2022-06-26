@@ -18,12 +18,12 @@ struct vect* position(struct vect*  positionPost, struct vect*  vitessePost);
 struct vect* acceleration(struct vect* positionPlanete);
 
 struct vect* vitesse(struct vect*  vitessePost, struct vect*  accelerationPost);
-/*
+
 double energiePotentielle(double massePlanete, struct vect* positionPlanete);
 
 double energieCinetique(double massePlanete, struct vect* vitesse);
 
 double energieTotale(double massePlanete, struct vect* positionPlanete, struct vect* vitesse);
-*/
+
 
 #endif //PROJETFINVINCENT_TRAJECTOIRE_H

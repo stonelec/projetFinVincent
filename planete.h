@@ -24,4 +24,6 @@ struct planete* createPlanete(char* name, double masse, double demieGrandAxe, do
 
 void printPlanete (struct planete* planete);
 
+void filePlanete(struct planete* p);
+
 #endif //PROJETFINVINCENT_PLANETE_H

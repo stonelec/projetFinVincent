@@ -23,6 +23,11 @@ struct Queue* createTrajectoire(double masse, double demieGrandAxe, double exent
         struct vect* newAcceleration = acceleration(newTraj->l->head->position);
         struct vect* newPosition = position(newTraj->l->head->position, newTraj->l->head->vitesse);
         struct vect* newVitesse = vitesse(newTraj->l->head->vitesse, newAcceleration);
+        /*
+        if(energieTotale(masse, newTraj->l->head->position, newTraj->l->head->vitesse) != energieTotale(masse, newPosition, newVitesse)){
+            return 0;
+        }
+        */
         enqueue(newTraj, newPosition, newVitesse, temps, &valid);
     }
     return newTraj;
@@ -39,12 +44,11 @@ struct vect* acceleration(struct vect* positionPlanete){
 struct vect* vitesse(struct vect*  vitessePost, struct vect* accelerationPost){
     return additionVecteurs(vitessePost, multiplicationVecteursParReel(accelerationPost, PAS));
 }
-/*
+
 double energiePotentielle(double massePlanete, struct vect* positionPlanete){
     struct vect* positionSoleil = createVect(0,0,0);
     return (CONSTANTEGRAVITATION*massePlanete*MASSESOLEIL) / (pow(distanceEntre2Vects(positionPlanete,positionSoleil),2));
-}// ici je fais juste pour la terre
-
+}
 double energieCinetique(double massePlanete, struct vect* vitesse){
     return 0.5*(massePlanete * pow(normeVecteur(vitesse),2));
 }
@@ -52,4 +56,3 @@ double energieCinetique(double massePlanete, struct vect* vitesse){
 double energieTotale(double massePlanete, struct vect* positionPlanete, struct vect* vitesse){
     return energiePotentielle(massePlanete, positionPlanete) + energieCinetique(massePlanete, vitesse);
 }
-*/
