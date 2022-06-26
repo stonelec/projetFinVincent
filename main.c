@@ -14,10 +14,25 @@ int main(){
     //printf("\nis%e",vect);
 
 
-    struct planete* newplanete;
-    newplanete = createPlanete("Terre", MASSEMERCURE, DEMIEGRANDAXEMERCURE, EXENTRICITEMERCURE  );
+    struct planete* mercure = createPlanete("Terre", MASSEMERCURE, DEMIEGRANDAXEMERCURE, EXENTRICITEMERCURE  );
+    struct planete* venus = createPlanete("venus",MASSEVENUS , DEMIEGRANDAXEVENUS, EXENTRICITEVENUS);
+    struct planete* terre = createPlanete("terre",MASSETERRE, DEMIEGRANDAXETERRE, EXENTRICITETERRE);
+    struct planete* mars = createPlanete("mars",MASSEMARS, DEMIEGRANDAXEMARS, EXENTRICITEMARS);
+    struct planete* jupiter = createPlanete("jupiter",MASSEJUPITER, DEMIEGRANDAXEJUPITER, EXENTRICITEJUPITER);
+    struct planete* saturne = createPlanete("saturne",MASSESATURNE, DEMIEGRANDAXESATURNE, EXENTRICITESATURNE);
+    struct planete* uranus = createPlanete("uranus",MASSEURANUS, DEMIEGRANDAXEURANUS, EXENTRICITEURANUS);
+    struct planete* neptune = createPlanete("neptune",MASSENEPTUNE, DEMIEGRANDAXENEPTUNE, EXENTRICITENEPTUNE);
+    struct planete* lune = createPlanete("lune",MASSELUNE, DEMIEGRANDAXELUNE, EXENTRICITELUNE);
 
-    printPlanete(newplanete);
+    printPlanete(mercure);
+    printPlanete(venus);
+    printPlanete(terre);
+    printPlanete(mars);
+    printPlanete(jupiter);
+    printPlanete(saturne);
+    printPlanete(uranus);
+    printPlanete(neptune);
+    printPlanete(lune);
 
     return 0;
 }
