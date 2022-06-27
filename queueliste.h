@@ -16,7 +16,7 @@ struct Queue{
 
 struct Queue* createEmptyQueue();
 
-void enqueue(struct Queue* q, struct vect* position, struct vect* vitesse,int temps, bool* valid);
+void enqueue(struct Queue* q, struct vect* position, struct vect* speed, int time, bool* valid);
 
 struct point* head(struct Queue* q, bool* valid);
 
@@ -29,4 +29,5 @@ bool isQueueEmpty(struct Queue* q);
 void printQueue(struct Queue* q);
 
 void deleteQueue(struct Queue** q);
+
 #endif //PROJETFINVINCENT_QUEUELISTE_H

@@ -9,18 +9,30 @@ struct List* createEmptyList(){
     if(l != NULL){
         l->head = NULL;
         l->size = 0;
+        l->tail = NULL;
     }
     return l;
 }
 
-void addFirst(struct List* l, struct vect* position, struct vect* vitesse, int temps){
-    struct point* newHead = createPoint(position,vitesse,temps);
+void addFirst(struct List* l, struct vect* position, struct vect* speed, int time){
+    struct point* newHead = createPoint(position,speed,time);
     struct point* formerHead = l->head;
     l->head = newHead;
     newHead->next = formerHead;
     l->size += 1;
 }
-
+void addLast(struct List* l, struct vect* position, struct vect* speed, int time){
+    struct point* newTail = createPoint(position,speed,time);
+    if (isListEmpty(l)){
+        l->head = newTail;
+        l->tail = newTail;
+        l->size++;
+    } else {
+        l->tail->next = newTail;
+        l->tail = newTail;
+        l->size += 1;
+    }
+}
 bool isListEmpty(struct List* l){
     return l->head == NULL;
 }
@@ -64,20 +76,20 @@ unsigned int listSize(struct List* l){
     return l->size;
 }
 
-void addItemPos(struct List* l, struct vect* position, struct vect* vitesse, int temps , unsigned int place, bool* valid){
+void addItemPos(struct List* l, struct vect* position, struct vect* speed, int time , unsigned int place, bool* valid){
     if(isListEmpty(l) && place == 0){
-        addFirst(l, position, vitesse, temps);
+        addFirst(l, position, speed, time);
         *valid = true;
     }
     else {
-        struct point* newItem = createPoint(position, vitesse, temps);
+        struct point* newItem = createPoint(position, speed, time);
         struct point* iter = l->head;
         if(place > listSize(l) || place < 0) {
             *valid = false;
             return;
         }
         if(place == 0) {
-            addFirst(l, position, vitesse, temps);
+            addFirst(l, position, speed, time);
             l->size++;
             *valid = true;
         }
@@ -126,3 +138,5 @@ void deleteList(struct List** l){
     free(temp);
     *l = NULL;
 }
+
+

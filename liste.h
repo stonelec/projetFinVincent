@@ -5,17 +5,21 @@
 #ifndef PROJETFINVINCENT_LISTE_H
 #define PROJETFINVINCENT_LISTE_H
 
-#include "infoPLanete.h"
+#include "infoPLanet.h"
 #include "point.h"
 
 struct List{
     unsigned int size;
     struct point* head;
+    struct point* tail;
 };
 
 struct List* createEmptyList();
 
-void addFirst(struct List* l, struct vect* position, struct vect* vitesse, int temps);
+void addFirst(struct List* l, struct vect* position, struct vect* speed, int time);
+void addLast(struct List* l, struct vect* position, struct vect* speed, int time);
+
+bool isListEmpty(struct List* l);
 
 struct point* getItemPos(struct List* l, unsigned int place, bool* valid);
 
@@ -25,7 +29,7 @@ void printList(struct List* l);
 
 unsigned int listSize(struct List* l);
 
-void addItemPos(struct List* l, struct vect* position, struct vect* vitesse, int temps, unsigned int place, bool* valid);
+void addItemPos(struct List* l, struct vect* position, struct vect* speed, int time , unsigned int place, bool* valid);
 
 void deleteItemPos(struct List* l, unsigned int place, bool* valid);
 

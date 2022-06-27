@@ -5,16 +5,16 @@
 #ifndef PROJETFINVINCENT_POINT_H
 #define PROJETFINVINCENT_POINT_H
 
-#include "vecteur.h"
-#include "infoPLanete.h"
+#include "vector.h"
+#include "infoPLanet.h"
 
 struct point{
     struct vect* position;
-    struct vect* vitesse;
-    int temps;
+    struct vect* speed;
+    int time;
     struct point* next;
 };
-struct point* createPoint(struct vect* position, struct vect* vitesse, int temps);
+struct point* createPoint(struct vect* position, struct vect* speed, int time );
 
 void printPoint(struct point* point);
 

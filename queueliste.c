@@ -11,13 +11,9 @@ struct Queue* createEmptyQueue(){
     return q;
 }
 
-void enqueue(struct Queue* q, struct vect* position, struct vect* vitesse, int temps, bool* valid){
+void enqueue(struct Queue* q, struct vect* position, struct vect* speed, int time, bool* valid){
     *valid = true;
-    struct point* newHead = createPoint(position,vitesse,temps);
-    newHead->next = q->l->head;
-    q->l->head = newHead;
-    q->l->size ++;
-
+    addLast(q->l, position,speed,time);
 }
 
 struct point* head(struct Queue* q, bool* valid){
@@ -39,14 +35,16 @@ struct point* dequeue(struct Queue* q, bool* valid){
         *valid = false;
         return 0;
     }
-    if(queueSize(q) == 1){
-        struct point* res = getItemPos(q->l,0,valid);
+    if(queueSize(q) > 0){
+        struct point* res = q->l->head;
         deleteFirst(q->l);
         return res;
     }
+    /*
     struct point* res = getItemPos(q->l, queueSize(q)-1,valid);
     deleteItemPos(q->l, queueSize(q)-1,valid);
     return res;
+     */
 }
 
 unsigned int queueSize(struct Queue* q){
@@ -58,21 +56,34 @@ bool isQueueEmpty(struct Queue* q){
 }
 
 void printQueue(struct Queue* q){
+/*
+    bool valid = true;
     if(isQueueEmpty(q)){
         printf("rear -> NULL <- front");
         return;
     }
-    struct point* iter = q->l->head;
     printf("rear -> ");
-    printPoint(iter);
     unsigned int size = queueSize(q);
-    iter = iter->next;
     for(unsigned int i=1; i<size;i++){
         printf("\n");
-        printPoint(iter);
-        iter = iter->next;
+        printPoint(dequeue(q, &valid));
     }
     printf(" <- front\n");
+    */
+    struct point* iter = q->l->head;
+    printf(",[[%f, %f, %f], ", iter->position->x, iter->position->y, iter->position->z);
+    printf("[%f, %f, %f],", iter->speed->x, iter->speed->y, iter->speed->z);
+    printf("%d]", iter->time);
+    iter = iter->next;
+    while (iter!= NULL){
+        printf("\n");
+        printf(",[[%f, %f, %f], ", iter->position->x, iter->position->y, iter->position->z);
+        printf("[%f, %f, %f],", iter->speed->x, iter->speed->y, iter->speed->z);
+        printf("%d]", iter->time);
+        iter = iter->next;
+    }
+    printf("]\n}");
+
 }
 
 void deleteQueue(struct Queue** q){
