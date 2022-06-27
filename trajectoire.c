@@ -33,11 +33,38 @@ struct Queue* createTrajectoire(double masse, double demieGrandAxe, double exent
     return newTraj;
 }
 
+void firstPointLune( struct Queue* newTraj,double demieGrandAxe, double exentricite,int temps, bool valid){
+    double xPositionInitiale = demieGrandAxe*(1-exentricite);
+    double yVitesseInitiale = sqrt((CONSTANTEGRAVITATION*MASSESOLEIL*(1+exentricite))/(demieGrandAxe*(1-exentricite)));
+    struct vect* positionInitiale = createVect(xPositionInitiale,0,0);
+    struct vect* vitesseInitiale = createVect(0,yVitesseInitiale,0);
+    enqueue(newTraj, positionInitiale, vitesseInitiale, temps, &valid);
+}
 
+struct Queue* createTrajectoireLune(double masse, double demieGrandAxe, double exentricite){
+    struct Queue* newTraj = createEmptyQueue();
+    int temps = 0;
+    bool valid;
+    firstPoint(newTraj,demieGrandAxe,exentricite,temps,&valid);
+
+    while (temps<NBPAS) {
+        temps++;
+        struct vect* newAcceleration = accelerationLune(newTraj->l->head->position);
+        struct vect* newPosition = position(newTraj->l->head->position, newTraj->l->head->vitesse);
+        struct vect* newVitesse = vitesse(newTraj->l->head->vitesse, newAcceleration);
+        enqueue(newTraj, newPosition, newVitesse, temps, &valid);
+    }
+    return newTraj;
+}
 struct vect* position(struct vect*  positionPost, struct vect* vitessePost){
     return additionVecteurs(positionPost, multiplicationVecteursParReel(vitessePost,PAS));
 }
 struct vect* acceleration(struct vect* positionPlanete){
+    //struct vect* positionTerre = f
+    double reelAcceleration = -((CONSTANTEGRAVITATION * MASSESOLEIL) / (pow(normeVecteur(positionPlanete),3)))/*+((CONSTANTEGRAVITATION * MASSETERRE) / (pow(distanceEntre2Vects(positionPlanete, ),3))))*/;
+    return multiplicationVecteursParReel(positionPlanete, reelAcceleration);
+}
+struct vect* accelerationLune(struct vect* positionPlanete){
     double reelAcceleration = -((CONSTANTEGRAVITATION * MASSESOLEIL) / (pow(normeVecteur(positionPlanete),3)));
     return multiplicationVecteursParReel(positionPlanete, reelAcceleration);
 }

@@ -34,29 +34,32 @@ void printPlanete (struct planete* planete){
 }
 
 void filePlanete(struct planete* p){
-    FILE* mercureFile = fopen("mercure.txt","w");
+
+    FILE* mercureFile = fopen("","w");
     if(mercureFile==NULL){
         printf("Error in opening file");
         return ;
     }
-    /*
-    fprintf(mercureFile, "%s", p->name);
     if(isQueueEmpty(p->traj)){
         return;
     }
+
+    fprintf(mercureFile, "{");
+    fprintf(mercureFile, "%s : [", p->name);
+
     struct point* iter = p->traj->l->head;
-    fprintf(mercureFile, "{(%f,%f,%f), ", iter->position->x, iter->position->y, iter->position->z);
-    fprintf(mercureFile, "(%f,%f,%f)", iter->vitesse->x, iter->vitesse->y, iter->vitesse->z);
-    fprintf(mercureFile, "%d}", iter->temps);
+    fprintf(mercureFile, "[[%f, %f, %f], ", iter->position->x, iter->position->y, iter->position->z);
+    fprintf(mercureFile, "[%f, %f, %f],", iter->vitesse->x, iter->vitesse->y, iter->vitesse->z);
+    fprintf(mercureFile, "%d]", iter->temps);
     unsigned int size = queueSize(p->traj);
     iter = iter->next;
     for(unsigned int i=1; i<size;i++){
         fprintf(mercureFile,"\n");
-        fprintf(mercureFile, "{(%f,%f,%f), ", iter->position->x, iter->position->y, iter->position->z);
-        fprintf(mercureFile, "(%f,%f,%f)", iter->vitesse->x, iter->vitesse->y, iter->vitesse->z);
-        fprintf(mercureFile, "%d}", iter->temps);
+        fprintf(mercureFile, ",[[%f, %f, %f], ", iter->position->x, iter->position->y, iter->position->z);
+        fprintf(mercureFile, "[%f, %f, %f],", iter->vitesse->x, iter->vitesse->y, iter->vitesse->z);
+        fprintf(mercureFile, "%d]", iter->temps);
         iter = iter->next;
     }
-     */
+    fprintf(mercureFile, "]\n}");
     fclose(mercureFile);
 }

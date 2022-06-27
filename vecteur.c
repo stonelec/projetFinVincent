@@ -32,3 +32,15 @@ double normeVecteur (struct vect* vecteur){
 double distanceEntre2Vects(struct vect* vecteur1, struct vect* vecteur2){
     return sqrt(pow((vecteur1->x-vecteur2->x),2) + pow((vecteur1->y-vecteur2->z),2) + pow((vecteur1->z-vecteur2->z),2));
 }
+void moduleTest (){
+    struct vect* vect1 = createVect(100, 100, 0);
+    struct vect* vect2 = createVect(5, 5, 0);
+    printVect(vect1);
+    printf("\n");
+    printVect(vect2);
+    printf("\n");
+    struct vect* vect = soustractionVecteurs(vect1,vect2);
+    printVect(vect);
+
+    printf("\nis%e",vect);
+}

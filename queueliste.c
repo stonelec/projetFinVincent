@@ -13,7 +13,10 @@ struct Queue* createEmptyQueue(){
 
 void enqueue(struct Queue* q, struct vect* position, struct vect* vitesse, int temps, bool* valid){
     *valid = true;
-    addFirst(q->l, position, vitesse, temps);
+    struct point* newHead = createPoint(position,vitesse,temps);
+    newHead->next = q->l->head;
+    q->l->head = newHead;
+    q->l->size ++;
 
 }
 
