@@ -3,30 +3,36 @@
 //
 
 #include "point.h"
-struct point* createPoint(struct vect* position, struct vect* vitesse, int temps){
-    struct point* new = malloc(sizeof (struct point));
+//créer un point avec des valeurs données
+struct Point* createPoint(struct Vect* position, struct Vect* speed, int time){
+    struct Point* new = malloc(sizeof (struct Point));
     if( new != NULL){
         new->position=position;
-        new->vitesse=vitesse;
-        new->temps=temps;
-        new->next=NULL
+        new->speed=speed;
+        new->time=time;
+        new->next=NULL;
     }
     return new;
 }
-
-struct vect* acceleration(double massePlanete, double constanteG, struct vect* positionPlanete){
-    double reelAcceleration = -((constanteG * massePlanete) / (normeVecteur(positionPlanete)));
-    return multiplicationVecteursParReel(positionPlanete, reelAcceleration);
+//afficher un point dans la console
+void printPoint(struct Point* point){
+    printf("[");
+    printVect(point->position);
+    printf(",");
+    printVect(point->speed);
+    printf(",%d]", point->time);
 }
+//ajouter un point dans un fichier
+void filePoint(struct Point* point, FILE* file){
 
-double vitesseInitiale(double constanteG, double demieGrandAxeOrbite, double exentriciteOrbite){
-    return sqrt((constanteG*MASSESOLEIL*(1+exentriciteOrbite))  / (demieGrandAxeOrbite*(1-exentriciteOrbite)));
+    fprintf(file, "[[%e, %e, %e], ", point->position->x, point->position->y, point->position->z);
+    fprintf(file, "[%e, %e, %e],", point->speed->x, point->speed->y, point->speed->z);
+    fprintf(file, "%d]", point->time);
 }
-
-struct vect* vitesse(struct vect*  vitessePost, struct vect* accelerationPost, int temps){
-    return additionVecteurs(vitessePost, multiplicationVecteursParScalaire(accelerationPost, temps));
-}
-
-struct vect* position(struct vect*  positionPost, struct vect* vitessePost, int temps){
-    return additionVecteurs(positionPost, multiplicationVecteursParScalaire(vitessePost, temps));
+//supprimer un point
+void deletePoint(struct Point** point){
+    deleteVector(&(*point)->position);
+    deleteVector(&(*point)->speed);
+    free(*point);
+    *point = NULL;
 }

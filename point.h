@@ -5,23 +5,21 @@
 #ifndef PROJETFINVINCENT_POINT_H
 #define PROJETFINVINCENT_POINT_H
 
-#include "vecteur.h"
-#include "infoPLanete.h"
+#include "vector.h"
+#include "infoPLanet.h"
 
-struct point{
-    struct vect* position;
-    struct vect* vitesse;
-    int temps;
-    struct point* next;
+struct Point{
+    struct Vect* position;
+    struct Vect* speed;
+    int time;
+    struct Point* next;
 };
-struct point* createPoint(struct vect* position, struct vect* vitesse, int temps);
+struct Point* createPoint(struct Vect* position, struct Vect* speed, int time );
 
-struct vect* acceleration(double massePlanete, double constanteG, struct vect* positionPlanete);
+void printPoint(struct Point* point);
 
-double vitesseInitiale(double masseSoleil, double constanteG, double demieGrandAxeOrbite, double exentriciteOrbite);
+void filePoint(struct Point* point, FILE* file);
 
-struct vect* vitesse(struct vect*  vitessePost, struct vect*  accelerationPost, int temps);
-
-struct vect* position(struct vect*  positionPost, struct vect*  vitessePost, int temps);
+void deletePoint(struct Point** point);
 
 #endif //PROJETFINVINCENT_POINT_H
