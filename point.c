@@ -3,8 +3,9 @@
 //
 
 #include "point.h"
-struct point* createPoint(struct vect* position, struct vect* speed, int time){
-    struct point* new = malloc(sizeof (struct point));
+//créer un point avec des valeurs données
+struct Point* createPoint(struct Vect* position, struct Vect* speed, int time){
+    struct Point* new = malloc(sizeof (struct Point));
     if( new != NULL){
         new->position=position;
         new->speed=speed;
@@ -13,19 +14,25 @@ struct point* createPoint(struct vect* position, struct vect* speed, int time){
     }
     return new;
 }
-
-void printPoint(struct point* point){
-    printf("\n  - position : ");
+//afficher un point dans la console
+void printPoint(struct Point* point){
+    printf("[");
     printVect(point->position);
-    printf(" vitesse : ");
+    printf(",");
     printVect(point->speed);
-    printf(" temps : %d", point->time);
+    printf(",%d]", point->time);
 }
-/*
-struct Point* head(struct Trajectory* t, bool* valid){
-        int list_size = listSize(t->list_point)-1;
-        return getItemPos(t->list_point,list_size,valid);
-        //return t->list_point->head;
-    }
+//ajouter un point dans un fichier
+void filePoint(struct Point* point, FILE* file){
 
-*/
+    fprintf(file, "[[%e, %e, %e], ", point->position->x, point->position->y, point->position->z);
+    fprintf(file, "[%e, %e, %e],", point->speed->x, point->speed->y, point->speed->z);
+    fprintf(file, "%d]", point->time);
+}
+//supprimer un point
+void deletePoint(struct Point** point){
+    deleteVector(&(*point)->position);
+    deleteVector(&(*point)->speed);
+    free(*point);
+    *point = NULL;
+}

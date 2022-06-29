@@ -8,14 +8,18 @@
 #include "vector.h"
 #include "infoPLanet.h"
 
-struct point{
-    struct vect* position;
-    struct vect* speed;
+struct Point{
+    struct Vect* position;
+    struct Vect* speed;
     int time;
-    struct point* next;
+    struct Point* next;
 };
-struct point* createPoint(struct vect* position, struct vect* speed, int time );
+struct Point* createPoint(struct Vect* position, struct Vect* speed, int time );
 
-void printPoint(struct point* point);
+void printPoint(struct Point* point);
+
+void filePoint(struct Point* point, FILE* file);
+
+void deletePoint(struct Point** point);
 
 #endif //PROJETFINVINCENT_POINT_H

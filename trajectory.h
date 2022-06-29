@@ -6,30 +6,36 @@
 #define PROJETFINVINCENT_TRAJECTOIRE_H
 
 #include "infoPLanet.h"
-#include "queueliste.h"
+#include "queuelist.h"
 #include "point.h"
 
-void firstPoint(struct Queue* newTraj,double demieGrandAxe, double exentricite,int time,  bool valid);
+double init(struct Queue* newTraj, double mass, double demieGrandAxe, double exentricite,int time,  bool valid);
 
-struct Queue* createTrajectory(double masse, double demieGrandAxe, double exentricite);
+struct Queue* createTrajectoryEuler(double masse, double demieGrandAxe, double exentricite);
 
-void firstPointMoon( struct Queue* newTraj,double demieGrandAxe, double exentricite,int time, bool valid);
+struct Queue* createTrajectoryEulerAsymetric(double masse, double demieGrandAxe, double exentricite);
 
-struct Queue* createTrajectoryMoon(double masse, double demieGrandAxe, double exentricite);
 
-struct vect* acceleration(struct vect* positionPlanet);
+struct Vect* acceleration(struct Vect* positionPlanet);
 
-struct vect* position(struct vect*  positionPost, struct vect*  speedPost);
+struct Vect* position(struct Vect*  positionPost, struct Vect*  speedPost);
 
-struct vect* accelerationMoon(struct vect* positionPlanet);
+struct Vect* speed(struct Vect*  speedPost, struct Vect*  accelerationPost);
 
-struct vect* speed(struct vect*  speedPost, struct vect*  accelerationPost);
+double energyPotential(double massePlanet, struct Vect* positionPlanet);
 
-double energyPotential(double massePlanet, struct vect* positionPlanet);
+double energyKinetic(double massePlanet, struct Vect* speed);
 
-double energyKinetic(double massePlanet, struct vect* speed);
+double energyTotal(double massePlanet, struct Vect* positionPlanet, struct Vect* speed);
 
-double energyTotal(double massePlanet, struct vect* positionPlanet, struct vect* speed);
+double calculVariationEnergy (double mass, struct Vect* newPosition, struct Vect* newSpeed, struct Point* lastPoint);
+
+double initMoon( struct Queue* newTraj, double mass, double demieGrandAxe, double exentricite,int time, bool valid);
+
+struct Queue* createTrajectoryEulerSymetricMoon(double mass, double demieGrandAxe, double exentricite);
+struct Queue* createTrajectoryEulerAsymetricMoon(double masse, double demieGrandAxe, double exentricite);
+
+struct Vect* accelerationMoon(struct Vect* positionMoon);
 
 
 #endif //PROJETFINVINCENT_TRAJECTOIRE_H

@@ -7,25 +7,27 @@
 
 #include "infoPLanet.h"
 
-struct vect{
+struct Vect{
     double x;
     double y;
     double z;
 };
 
-struct vect* createVect(double x, double y, double z);
+struct Vect* createVect(double x, double y, double z);
 
-void printVect(struct vect* printable);
+void printVect(struct Vect* printable);
 
-struct vect* additionVectors (struct vect* vector1, struct vect* vector2);
+struct Vect* additionVectors (struct Vect* vector1, struct Vect* vector2);
 
-struct vect* subtractionVectors (struct vect* vector1, struct vect* vector2);
+struct Vect* subtractionVectors (struct Vect* vector1, struct Vect* vector2);
 
-struct vect* multiplicationVectorsByReal (struct vect* vecteur, double real);
+struct Vect* multiplicationVectorsByReal (struct Vect* vecteur, double real);
 
-double normeVector (struct vect* vector);
+double normeVector (struct Vect* vector);
 
-double distance2Vects(struct vect* vector1, struct vect* vector2);
+double distance2Vects(struct Vect* vector1, struct Vect* vector2);
+
+void deleteVector(struct Vect** vector);
 
 void moduleTest ();
 
